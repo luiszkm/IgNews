@@ -13,14 +13,16 @@ module.exports = {
       '2xl': 32,
     },
     colors: {
-      transparent : 'transparent',
+      transparent: 'transparent',
       'black': '#000000',
       'white': '#FFFFFF',
-      
+
       gray: {
         900: '#121214',
-        800: '#202024',
+        800: '#29292e',
+        700: '#323238',
         400: '#7C7C8A',
+        300: '#a8a8b3',
         200: '#C4C34CC',
         100: '#E1E1E6',
       },
@@ -28,11 +30,16 @@ module.exports = {
       cyan: {
         500: '#81D8F7',
         300: '#9BE1F8',
-      }
+      },
+
+      yellow: {
+        500: '#eba417',
+      },
+
     },
     extend: {
       fontFamily: {
-        sans: 'roboto, sans-serif',
+        sans: 'Roboto, sans-serif',
       },
     },
   },
