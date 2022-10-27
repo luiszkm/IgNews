@@ -1,5 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { title } from 'process'
+import { Header } from '../components/Header'
 
 const Home: NextPage = () => {
   return (
@@ -7,7 +9,8 @@ const Home: NextPage = () => {
       <Head>
         <title>IgNews</title>
       </Head>
-      hellosss
+      
+      <Header />
       </h1>
   )
 }
