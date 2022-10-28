@@ -7,7 +7,7 @@ export function Header() {
 
   return (
     <header className="w-full flex items-center justify-center px-6 py-6 bg-gray-800 text-white">
-      <div className="w-full flex items-center gap-8">
+      <div className="w-full max-w-screen-lg flex items-center gap-8">
 
         <img src="" alt="logo ig.news" />
 
