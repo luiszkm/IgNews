@@ -1,5 +1,6 @@
 import { Button } from "./Button";
 import {AiOutlineGithub} from"react-icons/ai"
+import { ButtonSignIn } from "./ButtonSignIn";
 
 
 
@@ -21,9 +22,7 @@ export function Header() {
 
           </ul>
 
-          <Button icon={<AiOutlineGithub 
-          className="fill-yellow-500 hover:fill-cyan-500" size={24} />}
-          title="Singing with Github" />
+          <ButtonSignIn  /> 
         </nav>
       </div>
     </header>

@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import {  GetStaticProps } from 'next'
+import { GetStaticProps } from 'next'
 import { Button } from '../components/Button'
 import { stripe } from '../services/stripe'
 
@@ -39,7 +39,8 @@ export default function Home({ product }: HomeProps) {
 
             <Button primary
               title='Subscribe now'
-               priceId={product.priceId} />
+              priceId={product.priceId}
+              />
 
           </section>
           <img src="/images/avatar.svg" alt="foto de uma mulher com um notebook" />
