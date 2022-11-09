@@ -4,6 +4,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
   icon?: ReactNode
   primary?: boolean
+  priceId?: string
 }
 
 export function Button(props: ButtonProps) {

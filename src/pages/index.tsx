@@ -1,11 +1,23 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { title } from 'process'
+import {  GetStaticProps } from 'next'
 import { Button } from '../components/Button'
-import { Footer } from '../components/Footer'
-import { Header } from '../components/Header'
+import { stripe } from '../services/stripe'
 
-const Home: NextPage = () => {
+
+interface HomeProps {
+  product: {
+    priceId: string,
+    priceAmount: number,
+  }
+}
+
+
+export default function Home({ product }: HomeProps) {
+
+  console.log(product);
+
+
   return (
     <>
       <Head>
@@ -16,26 +28,48 @@ const Home: NextPage = () => {
 
         <div className='flex flex-col items-center gap-14 mt-4 md:flex-row w-full justify-between max-w-screen-lg'>
 
-        <section className='text-white px-5 py-5'>
-          <span>Hey, Welcome</span>
-          <h1 className='text-2xl font-black '>News about the <span className='text-cyan-500 '>React</span> world.</h1>
+          <section className='text-white px-5 py-5'>
+            <span>Hey, Welcome</span>
+            <h1 className='text-2xl font-black '>News about the <span className='text-cyan-500 '>React</span> world.</h1>
 
-          <p className='text-md'>
-            Get access to all the publications <br />
-            <span className='text-cyan-500 font-bold'>for $9.99 month.</span>
-          </p>
+            <p className='text-md'>
+              Get access to all the publications <br />
+              <span className='text-cyan-500 font-bold'>for {product.priceAmount} month.</span>
+            </p>
 
-          <Button primary
-          title='Subscribe now'/>
+            <Button primary
+              title='Subscribe now'
+               priceId={product.priceId} />
 
-        </section>
-        <img src="/images/avatar.svg" alt="foto de uma mulher com um notebook" />
+          </section>
+          <img src="/images/avatar.svg" alt="foto de uma mulher com um notebook" />
 
         </div>
       </main>
-  
-      </>
+
+    </>
   )
 }
 
-export default Home
+export const getStaticProps: GetStaticProps = async () => {
+  const price = await stripe.prices.retrieve('price_1LxgmCLM8GFvSaHhwfHCrkFK', {
+    expand: ['product']
+  })
+
+  const product = {
+    priceId: price.id,
+    priceAmount: new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+
+    }).format(Number(price.unit_amount) / 100)
+
+  }
+
+  return {
+    props: {
+      product
+    },
+    revalidate: 60 * 60 * 24 // 24 hours
+  }
+}
