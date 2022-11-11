@@ -9,7 +9,7 @@ import '../styles/global.css'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div className=' min-h-screen w-full flex flex-col justify-between'>
-      <SessionProvider >
+      <SessionProvider session={pageProps.session} >
         <Header />
         <Component {...pageProps} />
         <Footer />
