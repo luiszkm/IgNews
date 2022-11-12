@@ -12,12 +12,9 @@ interface HomeProps {
   }
 }
 
-
 export default function Home({ product }: HomeProps) {
 
-  console.log(product);
-
-
+  
   return (
     <>
       <Head>
@@ -37,7 +34,7 @@ export default function Home({ product }: HomeProps) {
               <span className='text-cyan-500 font-bold'>for {product.priceAmount} month.</span>
             </p>
 
-            <Button primary
+            <Button 
               title='Subscribe now'
               priceId={product.priceId}
               />

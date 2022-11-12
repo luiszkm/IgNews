@@ -14,8 +14,6 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export function ButtonSignIn(props: ButtonProps) {
   const { data: session } = useSession()
 
-  console.log(session);
-
 
   return session ? (
     <button className={"flex items-center gap-4 bg-gray-400 rounded-xl px-5 py-1 transition-colors hover:brightness-75"}
