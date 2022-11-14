@@ -39,7 +39,6 @@ export default NextAuth({
   callbacks: {
     async signIn({ user, account, profile }): Promise<boolean> {
 
-      console.log(user);
       const email: any = user.email
 
       try {

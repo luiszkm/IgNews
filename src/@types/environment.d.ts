@@ -22,5 +22,9 @@ namespace NodeJS {
     FAUNADB_KEY: string
     SIGNING_kEY: string
     STRIPE_API_KEY: string
+    STRIPE_SUCCESS_URL: string
+    STRIPE_CANCEL_URL: string
+
+
   }
 }

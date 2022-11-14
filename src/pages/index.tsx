@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
-import { Button } from '../components/Button'
+import { ButtonSubscribe } from '../components/ButtonSubscribe'
 import { stripe } from '../services/stripe'
 
 
@@ -14,7 +14,7 @@ interface HomeProps {
 
 export default function Home({ product }: HomeProps) {
 
-  
+
   return (
     <>
       <Head>
@@ -34,10 +34,10 @@ export default function Home({ product }: HomeProps) {
               <span className='text-cyan-500 font-bold'>for {product.priceAmount} month.</span>
             </p>
 
-            <Button 
+            <ButtonSubscribe
               title='Subscribe now'
               priceId={product.priceId}
-              />
+            />
 
           </section>
           <img src="/images/avatar.svg" alt="foto de uma mulher com um notebook" />

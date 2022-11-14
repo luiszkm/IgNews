@@ -1,5 +1,5 @@
-import { Button } from "./Button";
-import {AiOutlineGithub} from"react-icons/ai"
+import { Button } from "./ButtonSubscribe";
+import { AiOutlineGithub } from "react-icons/ai"
 import { ButtonSignIn } from "./ButtonSignIn";
 
 
@@ -22,7 +22,7 @@ export function Header() {
 
           </ul>
 
-          <ButtonSignIn  /> 
+          <ButtonSignIn />
         </nav>
       </div>
     </header>
