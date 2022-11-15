@@ -24,16 +24,21 @@ export function ButtonSubscribe(props: ButtonProps) {
       signIn('github')
       return
     }
+
     try {
       const response = await api.post('/subscribe')
 
       const { sessionId } = response.data
-
+      console.log(sessionId);
+      
       const stripe = await getStripeJs()
-      await stripe?.redirectToCheckout({sessionId})
+      await stripe?.redirectToCheckout( {sessionId} )
 
-    } catch (error) {
+    } catch (error: any) {
+      alert(error.message)
       console.log(error);
+      console.log('deu ruim');
+
 
     }
 
@@ -45,7 +50,7 @@ export function ButtonSubscribe(props: ButtonProps) {
 
       {...props}
       onClick={() => handleSubscribe()}
-      >
+    >
 
       {props.icon}
       {props.title}
