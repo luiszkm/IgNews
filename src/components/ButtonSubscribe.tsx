@@ -1,5 +1,7 @@
 import { useSession, signIn } from "next-auth/react";
 import { ButtonHTMLAttributes, ReactNode } from "react";
+import { api } from "../services/api";
+import { getStripeJs } from "../services/stripe-js";
 
 
 
@@ -16,25 +18,34 @@ export function ButtonSubscribe(props: ButtonProps) {
 
 
 
-  function handleSubscribe() {
-
+  async function handleSubscribe() {
 
     if (!session) {
       signIn('github')
       return
     }
+    try {
+      const response = await api.post('/subscribe')
 
-    return
+      const { sessionId } = response.data
+
+      const stripe = await getStripeJs()
+      await stripe?.redirectToCheckout({sessionId})
+
+    } catch (error) {
+      console.log(error);
+
+    }
+
   }
-
-
 
 
   return (
     <button className="flex items-center gap-4 bg-yellow-500 rounded-full px-12 py-3 mt-5 text-black font-bold transition-colors hover:brightness-75"
 
       {...props}
-      onClick={handleSubscribe}>
+      onClick={() => handleSubscribe()}
+      >
 
       {props.icon}
       {props.title}

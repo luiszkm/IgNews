@@ -20,10 +20,11 @@ namespace NodeJS {
     DATABASE_URL: string
     SECRET: string
     FAUNADB_KEY: string
-    SIGNING_kEY: string
+    //SIGNING_kEY: string
     STRIPE_API_KEY: string
     STRIPE_SUCCESS_URL: string
     STRIPE_CANCEL_URL: string
+    NEXT_PUBLIC_STRIPE_PUBLIC_KEY: string
 
 
   }

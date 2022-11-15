@@ -1,8 +1,4 @@
-import { Button } from "./ButtonSubscribe";
-import { AiOutlineGithub } from "react-icons/ai"
 import { ButtonSignIn } from "./ButtonSignIn";
-
-
 
 export function Header() {
 

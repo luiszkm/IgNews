@@ -6,13 +6,6 @@ import GithubProvider from "next-auth/providers/github"
 
 import { fauna } from "../../../services/fauna";
 
-interface SignInProps {
-  user: string;
-  account: string;
-  profile: string
-
-}
-
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
@@ -64,23 +57,15 @@ export default NextAuth({
               )
             )
           )
-
-          // q.Create(
-          //   q.Collection('users'),
-          //   { data: { email } }
-          // ),
         )
-
 
         return true
       } catch (error) {
         console.log(error)
+        console.log('deu ruim');
         return false;
-
       }
-
     },
-
   },
 }
 )
