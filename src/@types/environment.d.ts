@@ -26,6 +26,7 @@ namespace NodeJS {
     STRIPE_CANCEL_URL: string
     NEXT_PUBLIC_STRIPE_PUBLIC_KEY: string  
     STRIPE_WEBHOOKS_SECRET: string  
+    PRISMIC_ACCESS_TOKEN: string  
 
 
   }
