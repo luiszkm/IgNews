@@ -27,6 +27,7 @@ namespace NodeJS {
     NEXT_PUBLIC_STRIPE_PUBLIC_KEY: string  
     STRIPE_WEBHOOKS_SECRET: string  
     PRISMIC_ACCESS_TOKEN: string  
+    PRISMIC_ENPOINT: string  
 
 
   }
