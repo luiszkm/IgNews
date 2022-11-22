@@ -1,5 +1,5 @@
 
-import { query as q } from 'faunadb'
+import { query as q, query } from 'faunadb'
 
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
@@ -19,17 +19,47 @@ export default NextAuth({
         }
       }
     }),
-    // ...add more providers here
   ],
-  // session:{
-  //   strategy: 'jwt'
-
-  // },
-  // jwt:{
-  //   secret: process.env.default|| 'default',
-
-  // },
+  
   callbacks: {
+    async session({session}:any) {
+      try {
+        const userActiveSubscription = await fauna.query <string>(
+          q.Get(
+            q.Intersection([
+              q.Match(
+                q.Index('subscription_by_use_ref'),
+                q.Select(
+                  "ref",
+                  q.Get(
+                    q.Match(
+                      q.Index('user_by_email'),
+                      q.Casefold(session.user.email)
+                    )
+                  )
+                )
+              ),
+              q.Match(
+                q.Index('subscription_by_status'),
+                "active"
+              )
+            ])
+          )
+        )
+            
+        return {
+          ...session,
+          activeSubscription : userActiveSubscription
+        }
+      } catch (error) {
+        console.log(error)
+        return {
+          ...session,
+          activeSubscription : null
+        }
+      }
+    },
+
     async signIn({ user, account, profile }): Promise<boolean> {
 
       const email: any = user.email
@@ -42,7 +72,7 @@ export default NextAuth({
               q.Exists(
                 q.Match(
                   q.Index('user_by_email'),
-                  q.Casefold(email )
+                  q.Casefold(email)
                 )
               )
             ),
@@ -53,7 +83,7 @@ export default NextAuth({
             q.Get(
               q.Match(
                 q.Index('user_by_email'),
-                q.Casefold( email )
+                q.Casefold(email)
               )
             )
           )
@@ -62,7 +92,6 @@ export default NextAuth({
         return true
       } catch (error) {
         console.log(error)
-        console.log('deu ruim');
         return false;
       }
     },

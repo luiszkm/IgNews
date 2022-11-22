@@ -1,4 +1,6 @@
 import { useSession, signIn } from "next-auth/react";
+import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/router";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { api } from "../services/api";
 import { getStripeJs } from "../services/stripe-js";
@@ -15,7 +17,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export function ButtonSubscribe(props: ButtonProps) {
 
   const { data: session } = useSession()
-
+    const router = useRouter()
 
 
   async function handleSubscribe() {
@@ -23,6 +25,13 @@ export function ButtonSubscribe(props: ButtonProps) {
     if (!session) {
       signIn('github')
       return
+    }
+
+    if(session.activeSubscription){
+      router.push('/posts')
+      return 
+
+      
     }
 
     try {

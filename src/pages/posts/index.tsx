@@ -3,6 +3,7 @@ import Head from "next/head";
 import { getPrismicClient } from "../../services/prismic";
 import Prismic from '@prismicio/client'
 import { asText } from '@prismicio/helpers'
+import Link from "next/link";
 
 type Post = {
   slug: string
@@ -25,13 +26,15 @@ export default function Posts({ posts }: PostsProps) {
       <main className="flex max-w-6xl mx-auto my-0 ">
         <div >
           {posts.map(post => (
-            <a className="flex flex-col py-8 border-b-2 border-gray-400"
-              key={post.slug}
-              href="#">
-              <time className="text-gray-400">{post.updatedAt}</time>
-              <strong className="text-white text-xl transition hover:text-yellow-500 ">{post.title}</strong>
-              <p className="text-gray-400">{post.excerpt}</p>
-            </a>
+            <Link href={`/posts/${post.slug}`}>
+              <a className="flex flex-col py-8 border-b-2 border-gray-400"
+                key={post.slug}
+              >
+                <time className="text-gray-400">{post.updatedAt}</time>
+                <strong className="text-white text-xl transition hover:text-yellow-500 ">{post.title}</strong>
+                <p className="text-gray-400">{post.excerpt}</p>
+              </a>
+            </Link>
           ))}
 
 
@@ -52,12 +55,12 @@ export const getStaticProps: GetStaticProps = async () => {
       pageSize: 100,
     }
   )
-  const posts = response.results.map(post  => {
+  const posts  = response.results.map(post => {
     return {
       slug: post.uid,
       title: asText(post.data.title),
       excerpt: post.data.content.find((content: { type: string; }) => content.type === 'paragraph')?.text ?? '',
-      updatedAt: new Date(post.last_publication_date).toLocaleDateString('pt-BR', {
+      updatedAt: new Date(post.last_publication_date || '').toLocaleDateString('pt-BR', {
         day: '2-digit',
         month: 'long',
         year: 'numeric'
