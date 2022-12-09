@@ -21,11 +21,12 @@ export default function Post({post}: PostProps) {
     <Head>
     <title>{post.title} | IgNews</title>
     </Head>
-    <main>
-      <article className="text-white">
-        <h1>{post.title}</h1>
-        <time>{post.updatedAt}</time> 
-        <div dangerouslySetInnerHTML={{__html:post.content}}/>
+    <main className="mx-auto mt-20">
+      <article className="text-white  max-w-3xl">
+        <h1 className="text-[54px] font-extrabold">{post.title}</h1>
+        <time className="mt-6 text-sm text-gray-400">{post.updatedAt}</time> 
+        <div className="mt-8 text-md text-gray-100 leading-8"
+         dangerouslySetInnerHTML={{__html:post.content}}/>
       </article>
     </main>
     </>

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import { getPrismicClient } from "../../services/prismic";

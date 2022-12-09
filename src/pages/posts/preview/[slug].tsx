@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
 import { getSession, useSession } from "next-auth/react"
 import { getPrismicClient } from "../../../services/prismic"
@@ -32,11 +33,11 @@ useEffect(()=>{
       <Head>
         <title>{post.title} | IgNews</title>
       </Head>
-      <main>
-        <article className="text-white">
-          <h1>{post.title}</h1>
+      <main className="mx-auto mt-20">
+        <article className="text-white  max-w-3xl">
+          <h1 className="text-[54px] font-extrabold">{post.title}</h1>
           <time>{post.updatedAt}</time>
-          <div className="bg-gradient-to-b from-gray-90000 to-transparent    "
+          <div className="bg-gradient-to-b from-gray-900 to-transparent    "
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
